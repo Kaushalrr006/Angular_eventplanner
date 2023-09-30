@@ -1,0 +1,19 @@
+<div class="signup-container">
+    <h2>Sign Up</h2>
+    <form >
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" [(ngModel)]="name" [ngModelOptions]="{standalone: true}" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}" required>
+        </div>
+        
+        <button type="submit" class="signup-button" (click)=" signUp()">Sign Up</button>
+    </form>
+</div>

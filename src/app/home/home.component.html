@@ -1,0 +1,144 @@
+<mat-toolbar class="custom-toolbar flex flex-wrap justify-between items-center bg-gray-300 bg-opacity-60">
+  <span class="toolbar-title text-lg md:text-xl lg:text-2xl xl:text-3xl">Event Planner</span>
+  <div class="spacer hidden md:block lg:hidden xl:block flex-grow"></div>
+  <div class="flex flex-wrap space-x-2">
+      <a mat-button routerLink="/home" class="nav-link">Home</a>
+      <a mat-button routerLink="/event-card" class="nav-link">Add Card</a>
+      <a mat-button routerLink="/" class="nav-link">Login</a>
+  </div>
+</mat-toolbar>
+
+
+<div id="particles-js" class="w-screen h-screen fixed inset-0 z-0" style="z-index: -1;">
+
+    <!-- Add Task and Update buttons -->
+    <div class="absolute inset-x-0 bottom-0 mb-4">
+        <div class="flex justify-center">
+            <!-- Add Task button -->
+            <a routerLink="/event-card" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full inline-flex items-center mr-4">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    class="w-6 h-6 inline-block mr-2">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                </svg>
+                Add Task
+            </a>
+
+            
+           
+        </div>
+    </div>
+
+
+
+
+
+
+</div>
+
+
+<div class="mx-4 relative z-10">
+  <div class="event-list p-4 flex space-x-4 overflow-x-auto">
+    <!-- To-Do Column -->
+    <div
+      class="column flex flex-col space-y-2 p-2 rounded-lg bg-custom-purple w-1/4"
+      cdkDropList
+      #todoList="cdkDropList"
+      [cdkDropListData]="eventList"
+      [cdkDropListConnectedTo]="[doneList, inprogressList]"
+      (cdkDropListDropped)="drop($event, 'todo')"
+    >
+      <h2 class="head-title text-lg font-semibold mb-2 ml-4 text-ff5722-color">
+        To-Do <span *ngIf="eventList.length > 0">- {{ eventList.length }}</span>
+      </h2>
+      <div *ngFor="let event of eventList" class="event" cdkDrag>
+        <div class="todo-bg p-2 rounded-lg shadow-md relative">
+          <h3 class="text-md font-semibold mb-1 ml-2">{{ event.title }}</h3>
+          <p class="text-sm text-gray-600 ml-2">{{ event.description }}</p>
+          <div class="absolute inset-x-0 bottom-0 p-2">
+            <button
+              class="px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded-full text-sm float-right"
+             (click)=" onEditClick(event._id)">
+              Edit
+            </button>
+            
+            <button
+            class="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-full text-sm float-right mr-2"
+            (click)="deleteEvent(event._id)">
+            Delete
+          </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- In Progress Column -->
+    <div
+      class="column flex flex-col space-y-2 p-2 rounded-lg bg-custom-purple w-1/4"
+      cdkDropList
+      #inprogressList="cdkDropList"
+      [cdkDropListData]="inProgress"
+      [cdkDropListConnectedTo]="[todoList, doneList]"
+      (cdkDropListDropped)="drop($event, 'inProgress')"
+    >  
+      <h2 class="head-title text-lg font-semibold mb-2 ml-4 text-ff5722-color">
+        In Progress <span *ngIf="inProgress.length > 0">- {{ inProgress.length }}</span>
+      </h2>
+      <div *ngFor="let event of inProgress" class="event" cdkDrag>
+        <div class="inprogress-bg p-2 rounded-lg shadow-md relative">
+          <h3 class="text-md font-semibold mb-1 ml-2">{{ event.title }}</h3>
+          <p class="text-sm text-gray-600 ml-2">{{ event.description }}</p>
+          
+          <div class="absolute inset-x-0 bottom-0 p-2">
+            <button
+              class="px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded-full text-sm float-right"
+             (click)="onEditClick(event._id)">
+              Edit
+            </button>
+            <button
+              class="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-full text-sm float-right mr-2"
+              (click)="deleteEvent(event._id)">
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- Done Column -->
+<div
+  class="column flex flex-col space-y-2 p-2 rounded-lg bg-custom-purple w-1/4"
+  cdkDropList
+  #doneList="cdkDropList"
+  [cdkDropListData]="done"
+  [cdkDropListConnectedTo]="[todoList, inprogressList]"
+  (cdkDropListDropped)="drop($event, 'done')"
+>
+  <h2 class="head-title text-lg font-semibold mb-2 ml-4 text-ff5722-color">
+    Done <span *ngIf="done.length > 0">- {{ done.length }}</span>
+  </h2>
+  <div *ngFor="let event of done" class="event" cdkDrag>
+    <div class="done-bg p-2 rounded-lg shadow-md relative">
+      <h3 class="text-md font-semibold mb-1 ml-2">{{ event.title }}</h3>
+      <p class="text-sm text-gray-600 ml-2">{{ event.description }}</p>
+      <div class="absolute inset-x-0 bottom-0 p-2">
+        <button
+          class="px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded-full text-sm float-right"
+        (click)="onEditClick(event._id)">
+          Edit
+        </button>
+       
+        <button
+        class="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-full text-sm float-right mr-2"
+        (click)="deleteEvent(event._id)">
+        Delete
+      </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Add More Lists Here -->
+  </div>
+</div>
