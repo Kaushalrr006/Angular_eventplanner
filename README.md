@@ -23,7 +23,6 @@ To start app use: --> ng serve
 ## 🎨 Features
 
 The Event Manager allows users to:
-
 - ✨ Drag and Drop cards
 - 📅 Create new events
 - 📖 Read existing events
