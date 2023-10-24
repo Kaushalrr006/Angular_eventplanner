@@ -51,9 +51,3 @@ We welcome contributions from developers of all skill levels. Whether it's fixin
 ## 📧 Contact
 
 If you have any questions or need assistance, feel free to reach out to us at kaushal.ratnapagol20@vit.edu.
-
-## 🙌 Acknowledgments
-
-Thanks for considering contributing to this project. Your contributions help us make this Event Manager even more awesome!
-
-Let's make Hacktoberfest 2023 unforgettable together! 🌟
