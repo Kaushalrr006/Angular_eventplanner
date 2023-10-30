@@ -1,4 +1,3 @@
-
 # 🎉 Hacktoberfest 2023 - Event Manager using MEAN 🎉
 
 Welcome to the Event Manager project for Hacktoberfest 2023! We invite you to contribute to this exciting project and be part of an amazing open-source community. Help us improve the Event Planner Frontend built with Angular and make it even better!
